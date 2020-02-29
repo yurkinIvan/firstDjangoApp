@@ -1,0 +1,45 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f5f5f5;
+}
+
+/******************** COMMON STYLES ********************/
+
+.main-title {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    width: 70%;
+    margin: 0 auto;
+}
+
+/******************** HOME PAGE ********************/
+
+.article {
+    width: 80%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 20px 10px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.article a {
+    color: #000;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.article .article-image {
+    width: 100%;
+    background-color: rgb(194, 194, 194);
+    height: 500px;
+}

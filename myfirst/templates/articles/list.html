@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Последнии статьи{% endblock %}
+
+{% block content %}
+
+    <h1 class="main-title">Последние статьи</h1>
+
+    <div class="wrapper">
+        {% if latest_articles_list %}
+        {% load static %}
+        {% for a in latest_articles_list %}
+            <div class="article">
+                <img src=" {{ a.article_image.url }} " alt="Article image" class="article-image">
+                <a href = "{% url 'articles:detail' a.id %}">{{ a.article_title }}</a>
+            </div>
+        {% endfor %}
+
+        {% else %}
+            Статьи не найдены D:
+        {% endif %}
+    </div>
+
+{% endblock %}
