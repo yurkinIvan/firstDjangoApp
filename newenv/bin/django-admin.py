@@ -1,4 +1,4 @@
-#!/home/std/sites/django_project/firstDjangoApp/newenv/bin/python
+#!/home/std/sites/firstDjangoApp/newenv/bin/python
 from django.core import management
 
 if __name__ == "__main__":

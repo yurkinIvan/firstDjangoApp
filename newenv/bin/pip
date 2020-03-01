@@ -1,4 +1,4 @@
-#!/home/std/sites/django_project/firstDjangoApp/newenv/bin/python
+#!/home/std/sites/firstDjangoApp/newenv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
