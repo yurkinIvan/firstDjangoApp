@@ -4,37 +4,39 @@
 
 {% block content %}
 
-    <div class="wrapper">
+    <div class="article-wrapper">
         <h2 class="main-title">{{ article.article_title }}</h2>
-        <p>{{ article.article_text }}</p>
+        <p class="article-text">{{ article.article_text }}</p>
     
-        <em>{{ article.pub_date }}</em>
+        <p class="article-date">{{ article.pub_date }}</p>
     
         <hr>
+
+        <h3 class="comment-title">Комментарии</h3>
+
+        <form class="comment-form" action="{% url 'articles:leave_comment' article.id %}" method="POST">
     
+            {% csrf_token %}
+    
+            <input type="text" name="name" placeholder="Ваше имя" required maxlength = "50">
+            <br>
+            <textarea name="text" required placeholder="Текст комментария" maxlength = "200"></textarea>
+            <br>
+            <button type="submit">Оставить комментарий</button>
+        
+        </form>
+
         {% if comments %}
             
             {% for comment in comments %}
-                <strong>{{ comment.author_name }}</strong>
-                <p>{{ comment.comment_text }}</p>
+                <p class="author-name">{{ comment.author_name }}</p>
+                <p class="comment-text">{{ comment.comment_text }}</p>
             {% endfor %}
     
         {% else %}
             <p>Комментарии не найдены. Станьте первым</p>
         {% endif %}
     
-        <hr>
-    
-        <form action="{% url 'articles:leave_comment' article.id %}" method="POST">
-    
-            {% csrf_token %}
-    
-            <input type="text" name="name" placeholder="Ваше имя" required>
-            <br>
-            <textarea name="text" cols="30" rows="10" required placeholder="Текст комментария"></textarea>
-            <br>
-            <button type="submit">Оставить комментарий</button>
-        </form>
     </div>
 
 
