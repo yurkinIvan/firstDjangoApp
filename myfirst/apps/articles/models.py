@@ -25,6 +25,7 @@ class Comment(models.Model):
     
     author_name  = models.CharField('Автор комментария', max_length = 50)
     comment_text = models.CharField('Текст комментария', max_length = 200)
+    pub_date     = models.DateTimeField('Дата публикации')
 
     def __str__(self):
         return self.author_name
