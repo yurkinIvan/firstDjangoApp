@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/style.css' %}">
+    <link rel="stylesheet" href="{% static '/article.css' %}">
+{% endblock %}
+
 {% block title %}{{ article.article_title }}{% endblock %}
 
 {% block content %}
@@ -18,8 +24,6 @@
     
             {% csrf_token %}
     
-            <input type="text" name="name" placeholder="Ваше имя" required maxlength = "50">
-            <br>
             <textarea name="text" required placeholder="Текст комментария" maxlength = "200"></textarea>
             <br>
             <button type="submit">Оставить комментарий</button>

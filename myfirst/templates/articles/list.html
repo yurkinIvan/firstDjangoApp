@@ -1,8 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %}Последнии статьи{% endblock %}
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/style.css' %}">
+    <link rel="stylesheet" href="{% static '/home.css' %}">
+{% endblock %}
+
+{% block title %}Главная{% endblock %}
 
 {% block content %}
+
+    <header>
+        <p class="userName">Hello, {{request.user}}</p>
+        <a href="{% url 'articles:logoutUser' %}" class="logout">Logout</a>
+    </header>
 
     <h1 class="main-title">Последние статьи</h1>
 

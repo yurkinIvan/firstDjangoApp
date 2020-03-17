@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'articles.apps.ArticlesConfig',
-    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -132,6 +131,6 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, "static/public")
 ]
 
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 
 MEDIA_URL = '/media/'
