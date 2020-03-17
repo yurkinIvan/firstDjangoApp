@@ -91,3 +91,11 @@ header {
 .userName {
     margin-right: 10px;
 }
+
+.errorlist {
+    list-style: none;
+    color: rgb(165, 80, 80);
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+}

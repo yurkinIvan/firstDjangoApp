@@ -14,7 +14,9 @@
 
             {% csrf_token %}
 
-            {{form.errors}}
+            {% for error, text in form.errors.items %}
+                {{text}}
+            {% endfor %}
 
             <label for="id_username">{{form.username.label}}</label>
             {{form.username}}
