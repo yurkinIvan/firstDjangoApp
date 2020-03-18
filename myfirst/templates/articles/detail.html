@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block styles %}
+{% block links %}
     {% load static %}
     <link rel="stylesheet" href="{% static '/style.css' %}">
     <link rel="stylesheet" href="{% static '/article.css' %}">
@@ -11,6 +11,7 @@
 {% block content %}
 
     <div class="article-wrapper">
+        <!-- TODO: Add article image -->
         <h2 class="main-title">{{ article.article_title }}</h2>
         <p class="article-text">{{ article.article_text }}</p>
     

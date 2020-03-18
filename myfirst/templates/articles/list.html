@@ -1,35 +1,83 @@
 {% extends 'base.html' %}
 
-{% block styles %}
+{% block links %}
     {% load static %}
     <link rel="stylesheet" href="{% static '/style.css' %}">
     <link rel="stylesheet" href="{% static '/home.css' %}">
+    <script src="{% static '/home.js' %}"></script>
 {% endblock %}
 
 {% block title %}Главная{% endblock %}
 
 {% block content %}
-
     <header>
-        <p class="userName">Hello, {{request.user}}</p>
-        <a href="{% url 'articles:logoutUser' %}" class="logout">Logout</a>
-    </header>
-
-    <h1 class="main-title">Последние статьи</h1>
-
-    <div class="wrapper">
-        {% if latest_articles_list %}
-        {% load static %}
-        {% for a in latest_articles_list %}
-            <div class="article">
-                <img src=" {{ a.article_image.url }} " alt="Article image" class="article-image">
-                <a href = "{% url 'articles:detail' a.id %}">{{ a.article_title }}</a>
+        <div class="main-nav">
+            <div class="main-nav__menu">
+                <a href="">Home</a>
+                <a href="">About</a>
+                <a href="">Contact</a>
             </div>
-        {% endfor %}
-
-        {% else %}
-            Статьи не найдены D:
-        {% endif %}
-    </div>
-
+            <div class="main-nav__auth">
+                {% if request.user.is_anonymous %}
+                    <a href="#" class="userName">Войдите или зарегестрируйтесь</a>
+                    <a href="{% url 'articles:login' %}">Login</a>
+                    <a href="{% url 'articles:register' %}">Sign up</a>
+                {% else %}
+                    <a href="/admin" class="userName">{{request.user}}</a>
+                    <a href="{% url 'articles:logoutUser' %}" class="logout">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="wrapper">
+            <div class="filters">
+                <div class="categories-title">CATEGORIES</div>
+                <div class="categories">
+                    <a href="">Photography</a>
+                    <a href="">Games</a>
+                    <a href="">Programming</a>
+                    <a href="">Travels</a>
+                    <a href="">Movies</a>
+                </div>
+            </div>
+            <div class="articles">
+                {% if latest_articles_list %}
+                    {% load static %}
+                    {% for a in latest_articles_list %}
+                        <div class="card">
+                            <div class="card__img">
+                                <img src=" {{ a.article_image.url }} " alt="Article image">
+                            </div><div class="card__body">
+                                <a class="title" href = "{% url 'articles:detail' a.id %}">{{ a.article_title }}</a>
+                                <p class="article-text">{{ a.article_description }}</p>
+                                <div class="separator"></div>
+                                <span class="date">{{ a.pub_date }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <a class="load-btn">Загрузить ещё</a>
+                    {% else %}
+                        Статьи не найдены D:
+                {% endif %}
+            </div>
+                <div class="scrollbar-wrapper">
+                    <div class="scrollbar">
+                        <div class="slider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+     <footer>
+        <div class="footer-content">
+            <div class="copyright">© 2019 Yurkin Ivan</div>
+            <div class="social">
+                <a class="facebook" href=""></a>
+                <a class="twitter" href=""></a>
+                <a class="pinterest" href=""></a>
+                <a class="tamblr" href=""></a>
+            </div>
+        </div>
+    </footer>
 {% endblock %}

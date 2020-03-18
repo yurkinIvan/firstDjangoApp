@@ -3,10 +3,11 @@ from django.db import models
 from django.utils import timezone
 
 class Article(models.Model):
-    article_image = models.ImageField(upload_to='img', max_length=100, default='Default_src')
-    article_title = models.CharField('Название статьи', max_length = 200)
-    article_text  = models.TextField('Текст статьи')
-    pub_date      = models.DateTimeField('Дата публикации')
+    article_image       = models.ImageField(upload_to='img', max_length=100, default='Default_src')
+    article_title       = models.CharField('Название статьи', max_length = 200)
+    article_description = models.CharField('Описание статьи', max_length = 450)
+    article_text        = models.TextField('Текст статьи')
+    pub_date            = models.DateTimeField('Дата публикации')
 
     def __str__(self):
         return self.article_title

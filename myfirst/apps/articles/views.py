@@ -1,4 +1,5 @@
-from django.http import Http404, HttpResponseRedirect
+import json
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
@@ -13,12 +14,10 @@ from django.contrib.auth.decorators import login_required
 # Import models
 from .models import Article
 
-@login_required(login_url='articles:login')
 def index(request):
     latest_articles_list = Article.objects.order_by('-pub_date')[:5]
     return render(request, 'articles/list.html', { 'latest_articles_list': latest_articles_list })
 
-@login_required(login_url='articles:login')
 def detail(request, article_id):
     try:
         a = Article.objects.get(id = article_id)
@@ -64,7 +63,7 @@ def login(request):
 
 def logoutUser(request):
     logout(request)
-    return redirect('articles:login')
+    return redirect('articles:index')
 
 def register(request):
     if request.user.is_authenticated:
@@ -84,3 +83,26 @@ def register(request):
 
         context = {'form': form}
         return render(request, 'authorization/register.html', context)
+
+def loadArticles(request):
+    count = request.GET.get('count', 5)
+    count = int(count)
+
+    latest_articles_list = Article.objects.order_by('-pub_date')[count:count+5]
+
+    response_data = []
+
+    for a in latest_articles_list:
+        article          = {}
+        article["id"]    = a.id
+        article["img"]   = a.article_image.url
+        article["title"] = a.article_title
+        article["desc"]  = a.article_description
+        article["text"]  = a.article_text
+        article["date"]  = a.pub_date.strftime("%d %B %Y %H:%M")
+
+        response_data.append(article)
+
+    context = json.dumps(response_data)
+
+    return HttpResponse(context, content_type="application/json")
